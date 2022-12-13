@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+
+<insert id="insert" parameterType="hashMap">  
+    <![CDATA[
+    insert into pd
+    (pd_num, pd_name,pd_des, price,img,pd_category,pd_category_big) 
+    values
+    (#{pd_num}, #{pd_name},#{pd_des}, #{price}, #{img}, #{pd_category}, #{pd_category_big})
+    ]]>
+	</insert>
+
+
+<select id="select_list" parameterType="hashMap" resultType="hashMap">  
+<![CDATA[  
+select pd_num, pd_name, price,img,pd_category,pd_category_big
+from  pd where 1 = 1  
+]]>  
+<if test="keyword != null and keyword != ''">  
+and (pd_num like CONCAT('%',#{keyword},'%') or pd_name like CONCAT('%',#{keyword},'%')
+or pd_category like CONCAT('%',#{keyword},'%')  or pd_category_big like CONCAT('%',#{keyword},'%')) 
+</if>  
+
+</select>  
+
+<select id="select_detail" parameterType="hashMap" resultType="hashMap">
+    <![CDATA[
+select pd_num, pd_name, price,pd_des,img,pd_category,pd_category_big from pd where pd_num=#{pd_num}
+    ]]>
+</select>
+
+<update id="update" parameterType="hashMap">  
+<![CDATA[  
+update pd seT pd_name = #{pd_name}, price = #{price},pd_des = #{pd_des}, img = #{img},
+pd_category = #{pd_category},pd_category_big = #{pd_category_big} where pd_num = #{pd_num}  
+]]>  
+</update>  
+
+
+<delete id="delete" parameterType="hashMap">  
+<![CDATA[  
+delete from pd where pd_num = #{pd_num}  
+]]>  
+</delete>
+
+
+
+</mapper>

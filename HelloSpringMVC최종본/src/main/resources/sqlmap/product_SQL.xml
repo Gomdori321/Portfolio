@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pd">
+<!-- useGeneratedKeys="true" keyProperty="book_id"
+자동증가시 쓰이는 조합 -->
+
+<!-- title,category,price = 파라메터 -->
+<!-- title, category, price : 키 -->
+<!-- #{title} 등 : 그 파라메터의 값(=value) -->
+<insert id="insert" parameterType="hashMap" useGeneratedKeys="true" keyProperty="pd_name">  
+    <![CDATA[
+    insert into pd
+    (pd_num, pd_name, price, img) 
+    values
+    (#{pd_num}, #{pd_name}, #{price}, #{img})
+    ]]>
+</insert>
+
+<select id="select_detail" 
+parameterType="hashMap" 
+resultType="hashMap">
+<![CDATA[
+	select pd_num, pd_name, price, img
+	 from 
+	pd where pd_num=#{pd_num}
+]]>
+
+</select>
+
+<select id="listPage" parameterType="hashMap" resultType = "hashMap">
+	select * 
+	from pd order by pd_num desc limit #{page}, 8
+</select>
+
+<select id="listPageCri" parameterType = "hashMap" resultType="hashMap">
+	select * from pd order by pd_num desc limit #{pageStart},#{pageSize}
+</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<update id="update" parameterType="hashMap">
+<![CDATA[
+update pd set pd_num=#{pd_num)}, 
+pd_name=#{pd_name},price=#{price},img =#{img} where 
+ pd_num=#{pd_num}
+]]>
+</update>
+
+
+<delete id="delete" parameterType="hashMap">
+<![CDATA[
+delete from pd where pd_num=#{pd_num}
+]]>
+</delete>
+
+
+
+
+<!-- 게시판 글의 총 개수 or 검색된 글의 총 개수 -->
+<select id="countPD" parameterType="hashMap" 
+ resultType="int">
+ <![CDATA[
+ select count(*) from pd
+ where 1=1 
+ ]]> 
+ <if test="keyword!=null and keyword!=''">
+and (pd_name like CONCAT('%',#{keyword},'%') )
+ </if>
+ order by pd_num desc 
+
+</select>
+
+
+
+<select id="select_list" 
+parameterType="hashMap" 
+resultType="hashMap">
+<![CDATA[
+select pd_num,pd_name,price,pd_category,img, pd_category_big  
+ from pd 
+ where 1 = 1 
+ ]]> 
+ <if test="keyword!=null and keyword!=''">
+ and (pd_category like CONCAT('%',#{keyword},'%') 
+ or pd_category_big like CONCAT('%',#{keyword},'%'))
+ </if>
+ order by pd_name desc 
+ <choose>
+ 	<when test="skipCount==null">
+ 		limit 0,8
+ 	</when>
+ 	<when test="skipCount!=null">
+ 		limit ${skipCount}, 8
+ 	</when>
+ </choose>
+
+</select>
+
+
+<select id="select_list_c" 
+parameterType="hashMap" 
+resultType="hashMap">
+<![CDATA[
+select pd_num,pd_name,price,pd_category,img, pd_category_big  
+ from pd 
+ where pd_category_big=#{pd_category_big}
+ ]]> 
+ <if test="keyword!=null and keyword!=''">
+ and (pd_category like CONCAT('%',#{keyword},'%') 
+ or pd_category_big like CONCAT('%',#{keyword},'%'))
+ </if>
+ order by pd_name desc 
+ <choose>
+ 	<when test="skipCount==null">
+ 		limit 0,8
+ 	</when>
+ 	<when test="skipCount!=null">
+ 		limit ${skipCount}, 8
+ 	</when>
+ </choose>
+
+</select>
+
+<select id="select_list_cb" 
+parameterType="hashMap" 
+resultType="hashMap">
+<![CDATA[
+select pd_num,pd_name,price,pd_category,img, pd_category_big  
+ from pd 
+ where pd_category=#{pd_category}
+ ]]> 
+ <if test="keyword!=null and keyword!=''">
+ and (pd_category like CONCAT('%',#{keyword},'%') 
+ or pd_category_big like CONCAT('%',#{keyword},'%'))
+ </if>
+ order by pd_name desc 
+ <choose>
+ 	<when test="skipCount==null">
+ 		limit 0,8
+ 	</when>
+ 	<when test="skipCount!=null">
+ 		limit ${skipCount}, 8
+ 	</when>
+ </choose>
+
+</select>
+
+
+
+
+
+
+
+
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+

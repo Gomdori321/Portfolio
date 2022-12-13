@@ -1,4 +1,4 @@
-![header](https://capsule-render.vercel.app/api?type=slice&color=auto&height=300&section=header&text=Seojun%20GitHub&fontSize=90)
+![header](https://capsule-render.vercel.app/api?type=slice&color=auto&height=300&section=header&text%20GitHub&fontSize=90)
  <div align=center>
 <h2 align="center"> 안녕하세요! 백엔드 개발자를 목표로 공부를 하고 있습니다!! </h2> 
 
@@ -16,12 +16,4 @@
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Ahnseojun&layout=compact)](https://github.com/Ahnseojun/github-readme-stats)
 ---
 </div>
-<!-- ## 📩 Ask me about
-<a href="mailto:orbitahj@gmail.com"> <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white&link=mailto:orbitahj@gmail.com"/> </a>
--- >
-<!-- My status
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=Ahnseojun&show_icons=true)
--->
-<!--
-**Ahnseojun/Ahnseojun** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
--->
+
